@@ -4,6 +4,9 @@ const resolveImport = require("../../utils/resolvePath");
 function buildGraph(fileContents) {
   const graph = {};
   const files = Object.keys(fileContents);
+  
+  // Pre-compute O(1) Set for fast path resolution to prevent O(N^2) CPU locking
+  const filesSet = new Set(files);
 
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
@@ -15,8 +18,8 @@ function buildGraph(fileContents) {
     for (let j = 0; j < result.imports.length; j++) {
       const imp = result.imports[j];
 
-      // pass files array to help resolve relative paths
-      const resolved = resolveImport(imp, files, file);
+      // O(1) resolution via Set
+      const resolved = resolveImport(imp, filesSet, file);
       if (resolved) {
          resolvedImports.push(resolved);
       }
