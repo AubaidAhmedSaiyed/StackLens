@@ -1,0 +1,44 @@
+{
+  "repo": "https://github.com/expressjs/express",
+  "phase": "after",
+  "timestamp": "2026-06-22T14:00:57.046Z",
+  "runs": 3,
+  "averages": {
+    "totalRoundTripMs": 2947.489,
+    "backendScanTimeMs": 2134.3333333333335,
+    "backendGraphTimeMs": 785.3333333333334,
+    "backendTotalTimeMs": 2921
+  },
+  "rawRuns": [
+    {
+      "run": 1,
+      "totalRoundTripMs": 6872.081099999999,
+      "backendScanTimeMs": 5430,
+      "backendGraphTimeMs": 1376,
+      "backendTotalTimeMs": 6808,
+      "filesScanned": 141,
+      "nodes": 100,
+      "edges": 284
+    },
+    {
+      "run": 2,
+      "totalRoundTripMs": 1127.9791999999998,
+      "backendScanTimeMs": 628,
+      "backendGraphTimeMs": 490,
+      "backendTotalTimeMs": 1119,
+      "filesScanned": 141,
+      "nodes": 100,
+      "edges": 284
+    },
+    {
+      "run": 3,
+      "totalRoundTripMs": 842.4067000000014,
+      "backendScanTimeMs": 345,
+      "backendGraphTimeMs": 490,
+      "backendTotalTimeMs": 836,
+      "filesScanned": 141,
+      "nodes": 100,
+      "edges": 284
+    }
+  ]
+}
