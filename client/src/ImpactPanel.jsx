@@ -115,6 +115,26 @@ export default function ImpactPanel({ impactData, onSelectFile }) {
             <span style={{ color: 'var(--text-muted)' }}>Indirectly Dependent:</span>
             <strong>{impactSummary.indirectCount}</strong>
           </div>
+          
+          {impactSummary.affectedModules && impactSummary.affectedModules.length > 0 && (
+            <div style={{ marginTop: '12px' }}>
+              <div style={{ color: 'var(--text-muted)', marginBottom: '8px', fontSize: '12px' }}>Affected Modules:</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                {impactSummary.affectedModules.map(mod => (
+                  <span key={mod} style={{ 
+                    background: 'rgba(47, 129, 247, 0.1)', 
+                    padding: '4px 8px', 
+                    borderRadius: '4px', 
+                    fontSize: '11px', 
+                    border: '1px solid rgba(47, 129, 247, 0.3)', 
+                    color: 'var(--accent)' 
+                  }}>
+                    {mod}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -133,6 +153,69 @@ export default function ImpactPanel({ impactData, onSelectFile }) {
           <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--danger)', marginBottom: '8px', textTransform: 'uppercase' }}>Indirect Impact (Red)</div>
           {renderFileList(indirectImpact, "No indirect dependencies.")}
         </div>
+
+        {/* Dependency Chains */}
+        {impactData.chainEdges && impactData.chainEdges.length > 0 && (
+          <div style={{ marginTop: '24px' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-main)', marginBottom: '12px', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <FaProjectDiagram color="var(--text-muted)" /> Dependency Paths
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '250px', overflowY: 'auto', paddingRight: '4px' }}>
+              {(() => {
+                const adj = {};
+                impactData.chainEdges.forEach(e => {
+                  if (!adj[e.source]) adj[e.source] = [];
+                  adj[e.source].push(e.target);
+                });
+
+                const paths = [];
+                const dfs = (current, currentPath) => {
+                  if (!adj[current] || adj[current].length === 0) {
+                    if (currentPath.length > 1) paths.push([...currentPath]);
+                    return;
+                  }
+                  adj[current].forEach(neighbor => {
+                    if (!currentPath.includes(neighbor)) {
+                      dfs(neighbor, [...currentPath, neighbor]);
+                    } else {
+                      paths.push([...currentPath, neighbor + ' (cycle)']);
+                    }
+                  });
+                };
+                
+                dfs(selectedFile, [selectedFile]);
+
+                // Limit to 20 paths to prevent UI lag on massive chains
+                return paths.slice(0, 20).map((path, idx) => (
+                  <div key={idx} style={{ 
+                    fontSize: '11px', 
+                    color: 'var(--text-main)', 
+                    background: 'rgba(0,0,0,0.2)', 
+                    padding: '12px', 
+                    borderRadius: '6px', 
+                    border: '1px solid rgba(255,255,255,0.05)' 
+                  }}>
+                    {path.map((node, i) => (
+                      <div key={i} style={{ display: 'flex', flexDirection: 'column' }}>
+                        <span style={{ 
+                          fontWeight: i === 0 ? 600 : 400,
+                          color: i === 0 ? 'var(--accent)' : i === 1 ? 'var(--warning)' : 'var(--danger)' 
+                        }}>
+                          {node.split('/').pop()}
+                        </span>
+                        {i < path.length - 1 && (
+                          <span style={{ color: 'var(--text-muted)', margin: '4px 0 4px 6px', fontSize: '10px' }}>
+                            ↓
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ));
+              })()}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Mini Statistics */}

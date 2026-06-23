@@ -1,0 +1,71 @@
+[
+  {
+    "repository": "expressjs/express",
+    "timestamp": "2026-06-23T08:07:07.477Z",
+    "scale": {
+      "filesScanned": 141,
+      "nodes": 100,
+      "edges": 48
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 37,
+      "mostCoupledFile": "application.js",
+      "maxDependencyDepth": 3
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 2458,
+      "scanTimeMs": 1405,
+      "graphTimeMs": 1049,
+      "impactQueryTimeMs": 0,
+      "memoryUsedMB": 11
+    }
+  },
+  {
+    "repository": "expressjs/express",
+    "timestamp": "2026-06-23T08:06:32.251Z",
+    "scale": {
+      "filesScanned": 141,
+      "nodes": 100,
+      "edges": 48
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 37,
+      "mostCoupledFile": "application.js",
+      "maxDependencyDepth": 3
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 3100,
+      "scanTimeMs": 2667,
+      "graphTimeMs": 431,
+      "impactQueryTimeMs": 0,
+      "memoryUsedMB": 44
+    }
+  },
+  {
+    "repository": "expressjs/express",
+    "timestamp": "2026-06-23T08:01:55.282Z",
+    "scale": {
+      "filesScanned": 10,
+      "nodes": 10,
+      "edges": 10
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "a.js",
+      "maxDependencyDepth": 1
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 100,
+      "scanTimeMs": 10,
+      "graphTimeMs": 10,
+      "impactQueryTimeMs": 1,
+      "memoryUsedMB": 10
+    }
+  }
+]

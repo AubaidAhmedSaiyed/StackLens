@@ -1,3 +1,5 @@
+const { performance } = require('perf_hooks');
+
 class MetricsCollector {
   constructor() {
     this.metrics = {
@@ -9,20 +11,38 @@ class MetricsCollector {
       dead: 0,
       scanTimeMs: 0,
       graphTimeMs: 0,
-      totalTimeMs: 0
+      impactQueryTimeMs: 0,
+      totalTimeMs: 0,
+      memoryUsedMB: 0,
+      mostCoupledFile: null,
+      maxDependencyDepth: 0
     };
-    this.startTime = Date.now();
-    this.lapTime = Date.now();
+    
+    // Performance timers
+    this.startTime = performance.now();
+    this.lapTime = performance.now();
+    
+    // Memory tracker
+    this.startMemory = process.memoryUsage().heapUsed;
   }
 
   recordLap(metricName) {
-    const now = Date.now();
-    this.metrics[metricName] = now - this.lapTime;
+    const now = performance.now();
+    this.metrics[metricName] = Math.round(now - this.lapTime);
     this.lapTime = now;
   }
 
+  recordCustomTime(metricName, durationMs) {
+    this.metrics[metricName] = Math.round(durationMs);
+  }
+
   end() {
-    this.metrics.totalTimeMs = Date.now() - this.startTime;
+    this.metrics.totalTimeMs = Math.round(performance.now() - this.startTime);
+    
+    const endMemory = process.memoryUsage().heapUsed;
+    const usedBytes = endMemory - this.startMemory;
+    this.metrics.memoryUsedMB = Math.round(Math.max(0, usedBytes) / 1024 / 1024);
+    
     return this.metrics;
   }
 }

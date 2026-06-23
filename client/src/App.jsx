@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaSearch, FaLayerGroup } from 'react-icons/fa';
+import { FaGithub, FaSearch, FaLayerGroup, FaChartBar } from 'react-icons/fa';
 
 import GraphContainer from './GraphContainer';
 import ImpactPanel from './ImpactPanel';
 import SearchSidebar from './SearchSidebar';
+import MetricsDashboard from './MetricsDashboard';
 
 export default function App() {
   const [repoUrl, setRepoUrl] = useState('https://github.com/expressjs/express');
@@ -15,6 +16,8 @@ export default function App() {
   const [data, setData] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [impactData, setImpactData] = useState(null);
+  
+  const [showMetrics, setShowMetrics] = useState(false);
 
   const handleAnalyze = async (e) => {
     e.preventDefault();
@@ -85,67 +88,93 @@ export default function App() {
           </div>
         </div>
 
-        <form onSubmit={handleAnalyze} style={{ display: 'flex', gap: '12px', width: '550px' }}>
-          <div style={{ position: 'relative', flex: 1 }}>
-            <FaGithub style={{ position: 'absolute', left: '16px', top: '14px', color: 'var(--text-muted)', fontSize: '16px' }} />
-            <input 
-              type="text" 
-              value={repoUrl}
-              onChange={(e) => setRepoUrl(e.target.value)}
-              placeholder="https://github.com/owner/repo"
-              style={{
-                width: '100%',
-                padding: '12px 16px 12px 42px',
-                borderRadius: '8px',
-                border: '1px solid var(--border-color)',
-                background: 'rgba(10, 12, 16, 0.5)',
-                color: 'var(--text-main)',
-                fontSize: '14px',
-                outline: 'none',
-                transition: 'all 0.3s ease',
-                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.2)'
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = 'var(--accent)';
-                e.target.style.boxShadow = '0 0 0 2px var(--accent-glow), inset 0 2px 4px rgba(0,0,0,0.2)';
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = 'var(--border-color)';
-                e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.2)';
-              }}
-            />
-          </div>
+        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
           <button 
-            type="submit" 
-            disabled={loading}
+            onClick={() => setShowMetrics(true)}
             style={{
-              padding: '0 24px',
+              padding: '10px 16px',
               borderRadius: '8px',
-              background: loading ? 'var(--bg-panel-hover)' : 'linear-gradient(135deg, var(--accent) 0%, #1e5ab8 100%)',
-              color: loading ? 'var(--text-muted)' : 'white',
-              border: '1px solid ' + (loading ? 'var(--border-color)' : 'transparent'),
+              background: 'rgba(255,255,255,0.05)',
+              color: 'var(--text-main)',
+              border: '1px solid var(--border-color)',
               fontWeight: '600',
-              fontSize: '14px',
-              cursor: loading ? 'not-allowed' : 'pointer',
+              fontSize: '13px',
+              cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '10px',
-              transition: 'all 0.3s ease',
-              boxShadow: loading ? 'none' : '0 4px 12px var(--accent-glow)'
+              gap: '8px',
+              transition: 'all 0.2s ease'
             }}
+            onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
           >
-            {loading ? (
-              <motion.div 
-                animate={{ rotate: 360 }} 
-                transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                style={{ width: '16px', height: '16px', border: '2px solid var(--text-muted)', borderTopColor: 'transparent', borderRadius: '50%' }}
-              />
-            ) : (
-              <><FaSearch /> Analyze</>
-            )}
+            <FaChartBar color="var(--accent)" /> Benchmarks
           </button>
-        </form>
+
+          <form onSubmit={handleAnalyze} style={{ display: 'flex', gap: '12px', width: '550px' }}>
+            <div style={{ position: 'relative', flex: 1 }}>
+              <FaGithub style={{ position: 'absolute', left: '16px', top: '14px', color: 'var(--text-muted)', fontSize: '16px' }} />
+              <input 
+                type="text" 
+                value={repoUrl}
+                onChange={(e) => setRepoUrl(e.target.value)}
+                placeholder="https://github.com/owner/repo"
+                style={{
+                  width: '100%',
+                  padding: '12px 16px 12px 42px',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border-color)',
+                  background: 'rgba(10, 12, 16, 0.5)',
+                  color: 'var(--text-main)',
+                  fontSize: '14px',
+                  outline: 'none',
+                  transition: 'all 0.3s ease',
+                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.2)'
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = 'var(--accent)';
+                  e.target.style.boxShadow = '0 0 0 2px var(--accent-glow), inset 0 2px 4px rgba(0,0,0,0.2)';
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = 'var(--border-color)';
+                  e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.2)';
+                }}
+              />
+            </div>
+            <button 
+              type="submit" 
+              disabled={loading}
+              style={{
+                padding: '0 24px',
+                borderRadius: '8px',
+                background: loading ? 'var(--bg-panel-hover)' : 'linear-gradient(135deg, var(--accent) 0%, #1e5ab8 100%)',
+                color: loading ? 'var(--text-muted)' : 'white',
+                border: '1px solid ' + (loading ? 'var(--border-color)' : 'transparent'),
+                fontWeight: '600',
+                fontSize: '14px',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                transition: 'all 0.3s ease',
+                boxShadow: loading ? 'none' : '0 4px 12px var(--accent-glow)'
+              }}
+            >
+              {loading ? (
+                <motion.div 
+                  animate={{ rotate: 360 }} 
+                  transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                  style={{ width: '16px', height: '16px', border: '2px solid var(--text-muted)', borderTopColor: 'transparent', borderRadius: '50%' }}
+                />
+              ) : (
+                <><FaSearch /> Analyze</>
+              )}
+            </button>
+          </form>
+        </div>
       </header>
+
+      {showMetrics && <MetricsDashboard onClose={() => setShowMetrics(false)} />}
 
       {/* Main Content Area - 3 Pane Layout */}
       <main style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>

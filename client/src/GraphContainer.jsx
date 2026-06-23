@@ -7,9 +7,7 @@ import {
   useNodesState,
   useEdgesState,
   MarkerType,
-  Handle,
-  useReactFlow,
-  ReactFlowProvider
+  Handle
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import dagre from 'dagre';
@@ -71,7 +69,7 @@ const nodeTypes = {
 function GraphInner({ graphData, selectedFile, impactData, onNodeClick }) {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const { fitView, setCenter } = useReactFlow();
+  const reactFlowInstance = React.useRef(null);
 
   // 1. Initialize Graph
   useEffect(() => {
@@ -84,8 +82,8 @@ function GraphInner({ graphData, selectedFile, impactData, onNodeClick }) {
       className: ''
     }));
 
-    const initialEdges = graphData.edges.map(e => ({
-      id: e.id,
+    const initialEdges = graphData.edges.map((e, index) => ({
+      id: `${e.id}-${index}`,
       source: e.source,
       target: e.target,
       type: 'smoothstep', // Square routing
@@ -101,10 +99,12 @@ function GraphInner({ graphData, selectedFile, impactData, onNodeClick }) {
     
     // Slight delay to ensure React Flow is ready before fitting view
     setTimeout(() => {
-      fitView({ padding: 0.2 });
+      if (reactFlowInstance.current) {
+        reactFlowInstance.current.fitView({ padding: 0.2 });
+      }
     }, 50);
 
-  }, [graphData, setNodes, setEdges, fitView]);
+  }, [graphData, setNodes, setEdges]);
 
   // 2. Apply Impact Styles and Center Node
   useEffect(() => {
@@ -132,38 +132,43 @@ function GraphInner({ graphData, selectedFile, impactData, onNodeClick }) {
     const chainEdgeIds = new Set(chainEdges.map(e => `${e.source}->${e.target}`));
 
     setNodes(nds => nds.map(n => {
-      if (n.id === selectedFile) n.className = 'selected-node';
-      else if (directSet.has(n.id)) n.className = 'impact-direct';
-      else if (indirectSet.has(n.id)) n.className = 'impact-indirect';
-      else n.className = 'unrelated';
-      return n;
+      const newNode = { ...n };
+      if (newNode.id === selectedFile) newNode.className = 'selected-node';
+      else if (directSet.has(newNode.id)) newNode.className = 'impact-direct';
+      else if (indirectSet.has(newNode.id)) newNode.className = 'impact-indirect';
+      else newNode.className = 'unrelated';
+      return newNode;
     }));
 
     setEdges(eds => eds.map(e => {
+      const newEdge = { ...e };
       // An edge is highlighted if it's in the chain, OR if its source is the selected file (direct impact)
-      if (e.source === selectedFile) {
-        e.className = 'impact-direct';
-        e.animated = true;
-        e.markerEnd = { type: MarkerType.ArrowClosed, color: 'var(--warning)' };
-      } else if (chainEdgeIds.has(e.id) || (directSet.has(e.source) && indirectSet.has(e.target)) || (indirectSet.has(e.source) && indirectSet.has(e.target))) {
-        e.className = 'impact-indirect';
-        e.animated = true;
-        e.markerEnd = { type: MarkerType.ArrowClosed, color: 'var(--danger)' };
+      if (newEdge.source === selectedFile) {
+        newEdge.className = 'impact-direct';
+        newEdge.animated = true;
+        newEdge.markerEnd = { type: MarkerType.ArrowClosed, color: 'var(--warning)' };
+      } else if (chainEdgeIds.has(newEdge.id) || (directSet.has(newEdge.source) && indirectSet.has(newEdge.target)) || (indirectSet.has(newEdge.source) && indirectSet.has(newEdge.target))) {
+        newEdge.className = 'impact-indirect';
+        newEdge.animated = true;
+        newEdge.markerEnd = { type: MarkerType.ArrowClosed, color: 'var(--danger)' };
       } else {
-        e.className = 'unrelated';
-        e.animated = false;
-        e.markerEnd = { type: MarkerType.ArrowClosed, color: 'var(--border-color)' };
+        newEdge.className = 'unrelated';
+        newEdge.animated = false;
+        newEdge.markerEnd = { type: MarkerType.ArrowClosed, color: 'var(--border-color)' };
       }
-      return e;
+      return newEdge;
     }));
 
     // Center the graph on the selected node
-    const selectedNode = nodes.find(n => n.id === selectedFile);
-    if (selectedNode) {
-      setCenter(selectedNode.position.x + 90, selectedNode.position.y + 25, { zoom: 1.2, duration: 800 });
+    // We get the position from the layouted reactFlowInstance to avoid depending on 'nodes' state in this effect
+    if (reactFlowInstance.current) {
+      const selectedNode = reactFlowInstance.current.getNode(selectedFile);
+      if (selectedNode) {
+        reactFlowInstance.current.setCenter(selectedNode.position.x + 90, selectedNode.position.y + 25, { zoom: 1.2, duration: 800 });
+      }
     }
 
-  }, [selectedFile, impactData, graphData, setNodes, setEdges, setCenter]);
+  }, [selectedFile, impactData, graphData, setNodes, setEdges]);
 
   return (
     <ReactFlow
@@ -174,6 +179,7 @@ function GraphInner({ graphData, selectedFile, impactData, onNodeClick }) {
       onEdgesChange={onEdgesChange}
       onNodeClick={(_, node) => onNodeClick(node.id)}
       onPaneClick={() => onNodeClick(null)}
+      onInit={(instance) => { reactFlowInstance.current = instance; }}
       colorMode="dark"
       minZoom={0.05}
       maxZoom={4}
@@ -223,9 +229,7 @@ export default function GraphContainer(props) {
 
   return (
     <div style={{ flex: 1, position: 'relative' }}>
-      <ReactFlowProvider>
-        <GraphInner {...props} />
-      </ReactFlowProvider>
+      <GraphInner {...props} />
     </div>
   );
 }

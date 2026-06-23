@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     return res.status(404).json({ error: "No repository analyzed yet. Please run analysis first." });
   }
 
-  if (!files.includes(file)) {
+  if (!graph[file] && !reverseGraph[file]) {
     return res.status(404).json({ error: "File not found in analyzed repository." });
   }
 
@@ -47,6 +47,20 @@ router.get('/', (req, res) => {
     }
   }
 
+  // Calculate affected modules based on root directory names
+  const allAffected = [...directImpact, ...Array.from(indirectImpact)];
+  const moduleSet = new Set();
+  allAffected.forEach(f => {
+    const parts = f.split('/');
+    if (parts.length > 1) {
+      // Capitalize first letter for better readability
+      const mod = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+      moduleSet.add(mod);
+    } else {
+      moduleSet.add("Root");
+    }
+  });
+
   res.json({
     selectedFile: file,
     directImpact,
@@ -56,7 +70,8 @@ router.get('/', (req, res) => {
       totalAffected: directImpact.length + indirectImpact.size,
       directCount: directImpact.length,
       indirectCount: indirectImpact.size,
-      dependencyDepth: maxDepth
+      dependencyDepth: maxDepth,
+      affectedModules: Array.from(moduleSet)
     },
     repositoryContext: metrics
   });
