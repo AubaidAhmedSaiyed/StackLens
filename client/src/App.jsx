@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaSearch, FaLayerGroup } from 'react-icons/fa';
 
 import GraphContainer from './GraphContainer';
-import MetricsPanel from './MetricsPanel';
+import ImpactPanel from './ImpactPanel';
+import SearchSidebar from './SearchSidebar';
 
 export default function App() {
   const [repoUrl, setRepoUrl] = useState('https://github.com/expressjs/express');
@@ -12,6 +13,8 @@ export default function App() {
   const [error, setError] = useState(null);
   
   const [data, setData] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [impactData, setImpactData] = useState(null);
 
   const handleAnalyze = async (e) => {
     e.preventDefault();
@@ -20,6 +23,8 @@ export default function App() {
     setLoading(true);
     setError(null);
     setData(null);
+    setSelectedFile(null);
+    setImpactData(null);
 
     try {
       const response = await axios.post('http://localhost:5000/api/analyze', { url: repoUrl });
@@ -29,6 +34,22 @@ export default function App() {
       setError(err.response?.data?.error || err.message || 'Failed to analyze repository');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleFileSelect = async (file) => {
+    if (!file) {
+      setSelectedFile(null);
+      setImpactData(null);
+      return;
+    }
+
+    setSelectedFile(file);
+    try {
+      const response = await axios.get(`http://localhost:5000/api/impact?file=${encodeURIComponent(file)}`);
+      setImpactData(response.data);
+    } catch (err) {
+      console.error("Failed to fetch impact data:", err);
     }
   };
 
@@ -126,7 +147,7 @@ export default function App() {
         </form>
       </header>
 
-      {/* Main Content Area */}
+      {/* Main Content Area - 3 Pane Layout */}
       <main style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>
         
         <AnimatePresence>
@@ -178,15 +199,25 @@ export default function App() {
             </div>
           </div>
         ) : (
-          <>
-            <GraphContainer graphData={data?.visual} reverseGraph={data?.reverseGraph} />
+          <div style={{ display: 'flex', width: '100%', height: '100%' }}>
+            <SearchSidebar 
+              files={data?.files} 
+              onSelectFile={handleFileSelect} 
+              selectedFile={selectedFile} 
+            />
             
-            <AnimatePresence>
-              {data && (
-                <MetricsPanel metrics={data.metrics} analysis={data.analysis} />
-              )}
-            </AnimatePresence>
-          </>
+            <GraphContainer 
+              graphData={data?.visual} 
+              selectedFile={selectedFile}
+              impactData={impactData}
+              onNodeClick={handleFileSelect} 
+            />
+            
+            <ImpactPanel 
+              impactData={impactData} 
+              onSelectFile={handleFileSelect}
+            />
+          </div>
         )}
       </main>
     </div>

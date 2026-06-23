@@ -1,12 +1,65 @@
-const getImpact = require("../analysis/impact");
+const express = require('express');
+const router = express.Router();
+const repoCache = require('../cache/repoCache');
 
-app.get("/impact", (req, res) => {
-  const file = req.query.file;
+router.get('/', (req, res) => {
+  const { file } = req.query;
+  
+  if (!file) {
+    return res.status(400).json({ error: "File parameter is required" });
+  }
 
-  const impacted = getImpact(file, reverseGraph);
+  const { graph, reverseGraph, metrics, files } = repoCache.get();
+
+  if (!reverseGraph || !graph) {
+    return res.status(404).json({ error: "No repository analyzed yet. Please run analysis first." });
+  }
+
+  if (!files.includes(file)) {
+    return res.status(404).json({ error: "File not found in analyzed repository." });
+  }
+
+  const directImpact = reverseGraph[file] || [];
+  
+  // Find indirect impact using BFS
+  const indirectImpact = new Set();
+  const visited = new Set([file, ...directImpact]);
+  let maxDepth = 0;
+
+  // Queue stores [node, depth]
+  const queue = directImpact.map(d => [d, 1]);
+
+  // For the dependency chain section
+  const chainEdges = [];
+
+  while (queue.length > 0) {
+    const [current, depth] = queue.shift();
+    maxDepth = Math.max(maxDepth, depth);
+
+    const dependents = reverseGraph[current] || [];
+    for (const dep of dependents) {
+      chainEdges.push({ source: current, target: dep });
+      if (!visited.has(dep)) {
+        visited.add(dep);
+        indirectImpact.add(dep);
+        queue.push([dep, depth + 1]);
+      }
+    }
+  }
 
   res.json({
-    file,
-    impacted
+    selectedFile: file,
+    directImpact,
+    indirectImpact: Array.from(indirectImpact),
+    chainEdges, // edges starting from direct impacts and propagating downwards
+    impactSummary: {
+      totalAffected: directImpact.length + indirectImpact.size,
+      directCount: directImpact.length,
+      indirectCount: indirectImpact.size,
+      dependencyDepth: maxDepth
+    },
+    repositoryContext: metrics
   });
 });
+
+module.exports = router;

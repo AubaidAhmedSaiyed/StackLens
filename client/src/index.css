@@ -7,16 +7,19 @@
   --bg-panel-hover: rgba(33, 38, 45, 0.85);
   --text-main: #e6edf3;
   --text-muted: #848d97;
+  
   --accent: #2f81f7;
-  --accent-hover: #58a6ff;
   --accent-glow: rgba(47, 129, 247, 0.4);
+  
   --border-color: rgba(48, 54, 61, 0.8);
-  --border-highlight: rgba(88, 166, 255, 0.5);
   
   --danger: #f85149;
-  --danger-glow: rgba(248, 81, 73, 0.3);
-  --success: #3fb950;
+  --danger-glow: rgba(248, 81, 73, 0.4);
+  
   --warning: #d29922;
+  --warning-glow: rgba(210, 153, 34, 0.4);
+  
+  --success: #3fb950;
 
   --blur-radius: 12px;
 }
@@ -47,7 +50,7 @@ body {
 /* React Flow customizations */
 .react-flow__node {
   border-radius: 12px;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, opacity 0.4s ease;
 }
 
 .custom-node {
@@ -66,18 +69,6 @@ body {
   min-width: 150px;
 }
 
-.custom-node:hover, .react-flow__node.selected .custom-node {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent), 0 8px 24px var(--accent-glow);
-  transform: translateY(-2px);
-}
-
-.react-flow__node.impacted .custom-node {
-  border-color: var(--danger);
-  box-shadow: 0 0 0 1px var(--danger), 0 8px 24px var(--danger-glow);
-  background: linear-gradient(145deg, var(--bg-panel-solid) 0%, rgba(248, 81, 73, 0.15) 100%);
-}
-
 .node-icon {
   display: flex;
   align-items: center;
@@ -87,30 +78,73 @@ body {
   border-radius: 6px;
   background: rgba(47, 129, 247, 0.1);
   color: var(--accent);
+  transition: all 0.3s ease;
 }
 
-.react-flow__node.impacted .node-icon {
-  background: rgba(248, 81, 73, 0.1);
+/* Hover State */
+.custom-node:hover {
+  border-color: var(--text-muted);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+}
+
+/* Unrelated State (Faded) */
+.react-flow__node.unrelated {
+  opacity: 0.3;
+}
+.react-flow__edge.unrelated {
+  opacity: 0.2;
+}
+
+/* Selected State (Blue) */
+.react-flow__node.selected-node .custom-node {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 8px 24px var(--accent-glow);
+}
+.react-flow__node.selected-node {
+  transform: scale(1.05);
+  z-index: 10 !important;
+}
+
+/* Direct Impact State (Orange) */
+.react-flow__node.impact-direct .custom-node {
+  border-color: var(--warning);
+  box-shadow: 0 0 0 1px var(--warning), 0 8px 24px var(--warning-glow);
+  background: linear-gradient(145deg, var(--bg-panel-solid) 0%, rgba(210, 153, 34, 0.1) 100%);
+}
+.react-flow__node.impact-direct .node-icon {
+  background: rgba(210, 153, 34, 0.15);
+  color: var(--warning);
+}
+
+/* Indirect Impact State (Red) */
+.react-flow__node.impact-indirect .custom-node {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 1px var(--danger), 0 8px 24px var(--danger-glow);
+  background: linear-gradient(145deg, var(--bg-panel-solid) 0%, rgba(248, 81, 73, 0.1) 100%);
+}
+.react-flow__node.impact-indirect .node-icon {
+  background: rgba(248, 81, 73, 0.15);
   color: var(--danger);
 }
 
+
+/* Edge Styles */
 .react-flow__edge-path {
   stroke: var(--border-color);
   stroke-width: 1.5;
-  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  transition: stroke 0.4s ease, stroke-width 0.4s ease, opacity 0.4s ease;
 }
 
-.react-flow__edge:hover .react-flow__edge-path,
-.react-flow__edge.selected .react-flow__edge-path {
-  stroke: var(--accent);
+.react-flow__edge.impact-direct .react-flow__edge-path {
+  stroke: var(--warning);
   stroke-width: 2.5;
-  filter: drop-shadow(0 0 4px var(--accent-glow));
+  filter: drop-shadow(0 0 6px var(--warning-glow));
 }
 
-.react-flow__edge.impacted .react-flow__edge-path {
+.react-flow__edge.impact-indirect .react-flow__edge-path {
   stroke: var(--danger);
   stroke-width: 2.5;
-  filter: drop-shadow(0 0 4px var(--danger-glow));
+  filter: drop-shadow(0 0 6px var(--danger-glow));
 }
 
 /* Scrollbar */

@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const analyzeRouter = require('./server/routes/analyze');
+const impactRouter = require('./server/routes/impact');
 
 const app = express();
 app.use(cors());
@@ -9,6 +10,7 @@ app.use(express.json());
 
 // API Routes
 app.use('/api/analyze', analyzeRouter);
+app.use('/api/impact', impactRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {

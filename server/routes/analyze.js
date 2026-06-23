@@ -12,6 +12,7 @@ const getImpact = require("../analysis/impact");
 
 const transformGraph = require("../visualization/transformGraph");
 const MetricsCollector = require("../metrics/collector");
+const repoCache = require("../cache/repoCache");
 
 router.post("/", async (req, res) => {
   const collector = new MetricsCollector();
@@ -54,9 +55,8 @@ router.post("/", async (req, res) => {
     // 4. VISUALIZATION
     const visual = transformGraph(graph);
 
-    // 5. IMPACT SAMPLE (OPTION B)
-    const sampleFile = limitedFiles.length > 0 ? limitedFiles[0].path : null;
-    const impacted = sampleFile ? getImpact(sampleFile, reverseGraph) : [];
+    // 5. CACHE RESULTS FOR IMPACT API
+    repoCache.set(graph, reverseGraph, collector.metrics, limitedFiles.map(f => f.path));
 
     collector.end();
 
@@ -69,11 +69,7 @@ router.post("/", async (req, res) => {
       analysis: {
         circular: circ,
         heavy: heavyMods,
-        dead: deadMods,
-        impactSample: {
-          file: sampleFile,
-          impacted
-        }
+        dead: deadMods
       },
       metrics: collector.metrics
     });
