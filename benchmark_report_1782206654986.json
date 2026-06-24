@@ -1,0 +1,93 @@
+{
+  "timestamp": "2026-06-23T09:24:14.985Z",
+  "config": {
+    "API_URL": "http://localhost:5000/api/analyze",
+    "TARGET_REPO": "https://github.com/expressjs/express",
+    "TOTAL_RUNS": 10,
+    "WARMUP_RUNS": 2
+  },
+  "reliability": {
+    "successRate": "100.00%",
+    "failures": 0,
+    "successful": 10
+  },
+  "latencyStatisticsMs": {
+    "min": 528,
+    "max": 768,
+    "average": 631,
+    "p50_median": 603,
+    "p95": 757
+  },
+  "rawRuns": [
+    {
+      "run": 1,
+      "latencyMs": 744,
+      "backendTotalMs": 739,
+      "backendScanMs": 466,
+      "backendGraphMs": 272
+    },
+    {
+      "run": 2,
+      "latencyMs": 590,
+      "backendTotalMs": 583,
+      "backendScanMs": 395,
+      "backendGraphMs": 187
+    },
+    {
+      "run": 3,
+      "latencyMs": 660,
+      "backendTotalMs": 654,
+      "backendScanMs": 431,
+      "backendGraphMs": 223
+    },
+    {
+      "run": 4,
+      "latencyMs": 528,
+      "backendTotalMs": 522,
+      "backendScanMs": 343,
+      "backendGraphMs": 179
+    },
+    {
+      "run": 5,
+      "latencyMs": 768,
+      "backendTotalMs": 762,
+      "backendScanMs": 460,
+      "backendGraphMs": 302
+    },
+    {
+      "run": 6,
+      "latencyMs": 580,
+      "backendTotalMs": 572,
+      "backendScanMs": 391,
+      "backendGraphMs": 181
+    },
+    {
+      "run": 7,
+      "latencyMs": 663,
+      "backendTotalMs": 654,
+      "backendScanMs": 412,
+      "backendGraphMs": 242
+    },
+    {
+      "run": 8,
+      "latencyMs": 580,
+      "backendTotalMs": 574,
+      "backendScanMs": 371,
+      "backendGraphMs": 203
+    },
+    {
+      "run": 9,
+      "latencyMs": 579,
+      "backendTotalMs": 573,
+      "backendScanMs": 368,
+      "backendGraphMs": 205
+    },
+    {
+      "run": 10,
+      "latencyMs": 615,
+      "backendTotalMs": 610,
+      "backendScanMs": 371,
+      "backendGraphMs": 239
+    }
+  ]
+}

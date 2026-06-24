@@ -1,71 +1,1102 @@
 [
   {
-    "repository": "expressjs/express",
-    "timestamp": "2026-06-23T08:07:07.477Z",
+    "repository": "angular/angular",
+    "timestamp": "2026-06-24T07:04:56.978Z",
     "scale": {
-      "filesScanned": 141,
-      "nodes": 100,
-      "edges": 48
+      "filesScanned": 6909,
+      "nodes": 6908,
+      "edges": 9415
     },
     "quality": {
-      "circularDependencies": 0,
-      "heavyModules": 0,
-      "deadFiles": 37,
-      "mostCoupledFile": "application.js",
+      "circularDependencies": 250,
+      "heavyModules": 408,
+      "deadFiles": 2920,
+      "mostCoupledFile": "emit.ts",
       "maxDependencyDepth": 3
     },
     "performance": {
-      "totalAnalysisTimeMs": 2458,
-      "scanTimeMs": 1405,
-      "graphTimeMs": 1049,
-      "impactQueryTimeMs": 0,
-      "memoryUsedMB": 11
+      "totalAnalysisTimeMs": 145050,
+      "scanTimeMs": 100217,
+      "graphTimeMs": 44786,
+      "impactQueryTimeMs": 3
     }
   },
   {
-    "repository": "expressjs/express",
-    "timestamp": "2026-06-23T08:06:32.251Z",
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:35.412Z",
     "scale": {
-      "filesScanned": 141,
-      "nodes": 100,
-      "edges": 48
-    },
-    "quality": {
-      "circularDependencies": 0,
-      "heavyModules": 0,
-      "deadFiles": 37,
-      "mostCoupledFile": "application.js",
-      "maxDependencyDepth": 3
-    },
-    "performance": {
-      "totalAnalysisTimeMs": 3100,
-      "scanTimeMs": 2667,
-      "graphTimeMs": 431,
-      "impactQueryTimeMs": 0,
-      "memoryUsedMB": 44
-    }
-  },
-  {
-    "repository": "expressjs/express",
-    "timestamp": "2026-06-23T08:01:55.282Z",
-    "scale": {
-      "filesScanned": 10,
-      "nodes": 10,
-      "edges": 10
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
     },
     "quality": {
       "circularDependencies": 0,
       "heavyModules": 0,
       "deadFiles": 0,
-      "mostCoupledFile": "a.js",
-      "maxDependencyDepth": 1
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
     },
     "performance": {
-      "totalAnalysisTimeMs": 100,
-      "scanTimeMs": 10,
-      "graphTimeMs": 10,
-      "impactQueryTimeMs": 1,
-      "memoryUsedMB": 10
+      "totalAnalysisTimeMs": 718,
+      "scanTimeMs": 7,
+      "graphTimeMs": 683,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:34.644Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 779,
+      "scanTimeMs": 8,
+      "graphTimeMs": 745,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:33.819Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 751,
+      "scanTimeMs": 9,
+      "graphTimeMs": 706,
+      "impactQueryTimeMs": 5
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:33.027Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 735,
+      "scanTimeMs": 6,
+      "graphTimeMs": 702,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:32.244Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 634,
+      "scanTimeMs": 9,
+      "graphTimeMs": 605,
+      "impactQueryTimeMs": 3
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:31.527Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 736,
+      "scanTimeMs": 7,
+      "graphTimeMs": 694,
+      "impactQueryTimeMs": 3
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:30.711Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 679,
+      "scanTimeMs": 5,
+      "graphTimeMs": 635,
+      "impactQueryTimeMs": 5
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:29.965Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 670,
+      "scanTimeMs": 8,
+      "graphTimeMs": 632,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:29.207Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 631,
+      "scanTimeMs": 6,
+      "graphTimeMs": 603,
+      "impactQueryTimeMs": 3
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:28.506Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 764,
+      "scanTimeMs": 7,
+      "graphTimeMs": 726,
+      "impactQueryTimeMs": 5
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:27.659Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 705,
+      "scanTimeMs": 6,
+      "graphTimeMs": 671,
+      "impactQueryTimeMs": 5
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:26.881Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 673,
+      "scanTimeMs": 7,
+      "graphTimeMs": 634,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:26.128Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 637,
+      "scanTimeMs": 5,
+      "graphTimeMs": 603,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:25.422Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 627,
+      "scanTimeMs": 9,
+      "graphTimeMs": 584,
+      "impactQueryTimeMs": 3
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:24.721Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 774,
+      "scanTimeMs": 8,
+      "graphTimeMs": 740,
+      "impactQueryTimeMs": 7
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:23.874Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 676,
+      "scanTimeMs": 7,
+      "graphTimeMs": 645,
+      "impactQueryTimeMs": 7
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:23.130Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 616,
+      "scanTimeMs": 7,
+      "graphTimeMs": 590,
+      "impactQueryTimeMs": 3
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:22.444Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 737,
+      "scanTimeMs": 33,
+      "graphTimeMs": 674,
+      "impactQueryTimeMs": 7
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:21.616Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 645,
+      "scanTimeMs": 7,
+      "graphTimeMs": 615,
+      "impactQueryTimeMs": 6
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:20.877Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 602,
+      "scanTimeMs": 6,
+      "graphTimeMs": 564,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:20.200Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 723,
+      "scanTimeMs": 9,
+      "graphTimeMs": 689,
+      "impactQueryTimeMs": 7
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:19.390Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 701,
+      "scanTimeMs": 7,
+      "graphTimeMs": 666,
+      "impactQueryTimeMs": 7
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:18.587Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 647,
+      "scanTimeMs": 6,
+      "graphTimeMs": 605,
+      "impactQueryTimeMs": 14
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:17.834Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 811,
+      "scanTimeMs": 8,
+      "graphTimeMs": 759,
+      "impactQueryTimeMs": 9
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:16.901Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 734,
+      "scanTimeMs": 6,
+      "graphTimeMs": 680,
+      "impactQueryTimeMs": 18
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T07:00:16.076Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 1562,
+      "scanTimeMs": 26,
+      "graphTimeMs": 1481,
+      "impactQueryTimeMs": 8
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:59.697Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 811,
+      "scanTimeMs": 7,
+      "graphTimeMs": 765,
+      "impactQueryTimeMs": 7
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:58.843Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 844,
+      "scanTimeMs": 12,
+      "graphTimeMs": 787,
+      "impactQueryTimeMs": 8
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:57.953Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 845,
+      "scanTimeMs": 15,
+      "graphTimeMs": 787,
+      "impactQueryTimeMs": 20
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:57.070Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 788,
+      "scanTimeMs": 29,
+      "graphTimeMs": 727,
+      "impactQueryTimeMs": 8
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:56.239Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 732,
+      "scanTimeMs": 9,
+      "graphTimeMs": 689,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:55.394Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 843,
+      "scanTimeMs": 9,
+      "graphTimeMs": 783,
+      "impactQueryTimeMs": 11
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:54.456Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 693,
+      "scanTimeMs": 9,
+      "graphTimeMs": 647,
+      "impactQueryTimeMs": 9
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:53.675Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 825,
+      "scanTimeMs": 9,
+      "graphTimeMs": 779,
+      "impactQueryTimeMs": 8
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:52.753Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 704,
+      "scanTimeMs": 8,
+      "graphTimeMs": 664,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:51.937Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 720,
+      "scanTimeMs": 9,
+      "graphTimeMs": 666,
+      "impactQueryTimeMs": 8
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:51.120Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 769,
+      "scanTimeMs": 8,
+      "graphTimeMs": 719,
+      "impactQueryTimeMs": 9
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:50.270Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 705,
+      "scanTimeMs": 9,
+      "graphTimeMs": 656,
+      "impactQueryTimeMs": 9
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:49.476Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 724,
+      "scanTimeMs": 9,
+      "graphTimeMs": 681,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:48.660Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 753,
+      "scanTimeMs": 7,
+      "graphTimeMs": 710,
+      "impactQueryTimeMs": 8
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:47.811Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 744,
+      "scanTimeMs": 11,
+      "graphTimeMs": 695,
+      "impactQueryTimeMs": 7
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:46.967Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 793,
+      "scanTimeMs": 8,
+      "graphTimeMs": 745,
+      "impactQueryTimeMs": 7
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:46.055Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 761,
+      "scanTimeMs": 11,
+      "graphTimeMs": 716,
+      "impactQueryTimeMs": 5
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:45.216Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 774,
+      "scanTimeMs": 9,
+      "graphTimeMs": 738,
+      "impactQueryTimeMs": 8
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:44.355Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 829,
+      "scanTimeMs": 9,
+      "graphTimeMs": 776,
+      "impactQueryTimeMs": 10
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:43.418Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 671,
+      "scanTimeMs": 8,
+      "graphTimeMs": 632,
+      "impactQueryTimeMs": 4
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:42.666Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 715,
+      "scanTimeMs": 9,
+      "graphTimeMs": 668,
+      "impactQueryTimeMs": 8
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:41.864Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 790,
+      "scanTimeMs": 8,
+      "graphTimeMs": 742,
+      "impactQueryTimeMs": 7
+    }
+  },
+  {
+    "repository": "mock/6000-files",
+    "timestamp": "2026-06-24T06:56:40.973Z",
+    "scale": {
+      "filesScanned": 6000,
+      "nodes": 6000,
+      "edges": 5999
+    },
+    "quality": {
+      "circularDependencies": 0,
+      "heavyModules": 0,
+      "deadFiles": 0,
+      "mostCoupledFile": "file_1.js",
+      "maxDependencyDepth": 5998
+    },
+    "performance": {
+      "totalAnalysisTimeMs": 768,
+      "scanTimeMs": 7,
+      "graphTimeMs": 720,
+      "impactQueryTimeMs": 4
     }
   }
 ]

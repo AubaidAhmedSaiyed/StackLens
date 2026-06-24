@@ -1,0 +1,6 @@
+{
+  "expectedError": {
+    "error": "Failed to analyze repository",
+    "details": "Request failed with status code 404"
+  }
+}

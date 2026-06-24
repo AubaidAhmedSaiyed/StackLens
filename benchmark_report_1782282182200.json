@@ -1,0 +1,163 @@
+{
+  "timestamp": "2026-06-24T06:23:02.197Z",
+  "config": {
+    "API_URL": "http://localhost:5000/api/analyze",
+    "TARGET_REPO": "https://github.com/expressjs/express",
+    "TOTAL_RUNS": 20,
+    "WARMUP_RUNS": 2
+  },
+  "reliability": {
+    "successRate": "100.00%",
+    "failures": 0,
+    "successful": 20
+  },
+  "latencyStatisticsMs": {
+    "min": 933,
+    "max": 1865,
+    "average": 1228,
+    "p50_median": 1156,
+    "p95": 1818
+  },
+  "rawRuns": [
+    {
+      "run": 1,
+      "latencyMs": 1166,
+      "backendTotalMs": 1153,
+      "backendScanMs": 503,
+      "backendGraphMs": 645
+    },
+    {
+      "run": 2,
+      "latencyMs": 1352,
+      "backendTotalMs": 1337,
+      "backendScanMs": 600,
+      "backendGraphMs": 736
+    },
+    {
+      "run": 3,
+      "latencyMs": 933,
+      "backendTotalMs": 920,
+      "backendScanMs": 428,
+      "backendGraphMs": 492
+    },
+    {
+      "run": 4,
+      "latencyMs": 1044,
+      "backendTotalMs": 1031,
+      "backendScanMs": 479,
+      "backendGraphMs": 552
+    },
+    {
+      "run": 5,
+      "latencyMs": 1187,
+      "backendTotalMs": 1175,
+      "backendScanMs": 574,
+      "backendGraphMs": 601
+    },
+    {
+      "run": 6,
+      "latencyMs": 1160,
+      "backendTotalMs": 1148,
+      "backendScanMs": 492,
+      "backendGraphMs": 655
+    },
+    {
+      "run": 7,
+      "latencyMs": 1065,
+      "backendTotalMs": 1046,
+      "backendScanMs": 497,
+      "backendGraphMs": 548
+    },
+    {
+      "run": 8,
+      "latencyMs": 1148,
+      "backendTotalMs": 1134,
+      "backendScanMs": 504,
+      "backendGraphMs": 629
+    },
+    {
+      "run": 9,
+      "latencyMs": 1152,
+      "backendTotalMs": 1135,
+      "backendScanMs": 533,
+      "backendGraphMs": 601
+    },
+    {
+      "run": 10,
+      "latencyMs": 1039,
+      "backendTotalMs": 1024,
+      "backendScanMs": 425,
+      "backendGraphMs": 599
+    },
+    {
+      "run": 11,
+      "latencyMs": 1149,
+      "backendTotalMs": 1136,
+      "backendScanMs": 574,
+      "backendGraphMs": 561
+    },
+    {
+      "run": 12,
+      "latencyMs": 1024,
+      "backendTotalMs": 1011,
+      "backendScanMs": 458,
+      "backendGraphMs": 552
+    },
+    {
+      "run": 13,
+      "latencyMs": 1285,
+      "backendTotalMs": 1274,
+      "backendScanMs": 548,
+      "backendGraphMs": 726
+    },
+    {
+      "run": 14,
+      "latencyMs": 1865,
+      "backendTotalMs": 1852,
+      "backendScanMs": 1241,
+      "backendGraphMs": 608
+    },
+    {
+      "run": 15,
+      "latencyMs": 1399,
+      "backendTotalMs": 1388,
+      "backendScanMs": 929,
+      "backendGraphMs": 458
+    },
+    {
+      "run": 16,
+      "latencyMs": 1056,
+      "backendTotalMs": 1043,
+      "backendScanMs": 479,
+      "backendGraphMs": 563
+    },
+    {
+      "run": 17,
+      "latencyMs": 1149,
+      "backendTotalMs": 1139,
+      "backendScanMs": 477,
+      "backendGraphMs": 661
+    },
+    {
+      "run": 18,
+      "latencyMs": 1222,
+      "backendTotalMs": 1207,
+      "backendScanMs": 529,
+      "backendGraphMs": 677
+    },
+    {
+      "run": 19,
+      "latencyMs": 1815,
+      "backendTotalMs": 1803,
+      "backendScanMs": 549,
+      "backendGraphMs": 1253
+    },
+    {
+      "run": 20,
+      "latencyMs": 1358,
+      "backendTotalMs": 1346,
+      "backendScanMs": 399,
+      "backendGraphMs": 945
+    }
+  ]
+}

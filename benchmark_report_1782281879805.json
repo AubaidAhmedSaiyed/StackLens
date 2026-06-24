@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-06-24T06:17:59.803Z",
+  "config": {
+    "API_URL": "http://localhost:5000/api/analyze",
+    "TARGET_REPO": "https://github.com/expressjs/express",
+    "TOTAL_RUNS": 5,
+    "WARMUP_RUNS": 1
+  },
+  "reliability": {
+    "successRate": "100.00%",
+    "failures": 0,
+    "successful": 5
+  },
+  "latencyStatisticsMs": {
+    "min": 1157,
+    "max": 1356,
+    "average": 1255,
+    "p50_median": 1232,
+    "p95": 1351
+  },
+  "rawRuns": [
+    {
+      "run": 1,
+      "latencyMs": 1199,
+      "backendTotalMs": 1182,
+      "backendScanMs": 470,
+      "backendGraphMs": 712
+    },
+    {
+      "run": 2,
+      "latencyMs": 1232,
+      "backendTotalMs": 1217,
+      "backendScanMs": 602,
+      "backendGraphMs": 614
+    },
+    {
+      "run": 3,
+      "latencyMs": 1356,
+      "backendTotalMs": 1343,
+      "backendScanMs": 571,
+      "backendGraphMs": 772
+    },
+    {
+      "run": 4,
+      "latencyMs": 1157,
+      "backendTotalMs": 1144,
+      "backendScanMs": 533,
+      "backendGraphMs": 611
+    },
+    {
+      "run": 5,
+      "latencyMs": 1329,
+      "backendTotalMs": 1314,
+      "backendScanMs": 557,
+      "backendGraphMs": 757
+    }
+  ]
+}

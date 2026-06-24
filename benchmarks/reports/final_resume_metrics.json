@@ -1,0 +1,27 @@
+{
+  "repository": "https://github.com/expressjs/express",
+  "fileCount": 141,
+  "nodeCount": 141,
+  "edgeCount": 62,
+  "fetchMs": 471,
+  "astParsingMs": 939,
+  "graphBuildMs": 2,
+  "bfsMs": 0,
+  "cycleDetectionMs": 0,
+  "deadCodeMs": 0,
+  "totalAnalysisMs": 1413,
+  "peakHeapMB": 83,
+  "averageHeapMB": 78,
+  "finalHeapMB": 81,
+  "rssMB": 181,
+  "statistics": {
+    "runs": 20,
+    "min": 697,
+    "max": 5988,
+    "mean": 1413,
+    "p50": 1160,
+    "p95": 2196,
+    "p99": 5230
+  },
+  "coldRunData": null
+}

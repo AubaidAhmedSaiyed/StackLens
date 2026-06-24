@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaSearch, FaLayerGroup, FaChartBar } from 'react-icons/fa';
+import { FaGithub, FaPlay, FaCircleNotch } from 'react-icons/fa';
 
+import TelemetryBar from './TelemetryBar';
+import RepositoryExplorer from './RepositoryExplorer';
 import GraphContainer from './GraphContainer';
-import ImpactPanel from './ImpactPanel';
-import SearchSidebar from './SearchSidebar';
-import MetricsDashboard from './MetricsDashboard';
+import ContextInspector from './ContextInspector';
 
 export default function App() {
   const [repoUrl, setRepoUrl] = useState('https://github.com/expressjs/express');
@@ -16,8 +15,6 @@ export default function App() {
   const [data, setData] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [impactData, setImpactData] = useState(null);
-  
-  const [showMetrics, setShowMetrics] = useState(false);
 
   const handleAnalyze = async (e) => {
     e.preventDefault();
@@ -57,198 +54,106 @@ export default function App() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw', overflow: 'hidden' }}>
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: '300px 1fr 350px', 
+      gridTemplateRows: 'auto auto 1fr',
+      gridTemplateAreas: `
+        "top top top"
+        "tool tool tool"
+        "left center right"
+      `,
+      height: '100vh', 
+      width: '100vw', 
+      overflow: 'hidden',
+      background: 'var(--bg-base)'
+    }}>
       
-      {/* Header Area */}
-      <header className="glass-panel" style={{ 
-        padding: '16px 32px', 
-        borderBottom: '1px solid var(--border-color)',
+      {/* Row 1: Telemetry Status Bar */}
+      <div style={{ gridArea: 'top' }}>
+        <TelemetryBar repoUrl={repoUrl} metrics={data?.metrics} />
+      </div>
+
+      {/* Row 2: Tool Bar (Input) */}
+      <div style={{ 
+        gridArea: 'tool', 
+        borderBottom: '1px solid var(--border-color)', 
+        padding: '8px 12px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        zIndex: 100
+        gap: '16px',
+        background: 'var(--bg-panel)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <div style={{ 
-            background: 'linear-gradient(135deg, var(--accent) 0%, #1e5ab8 100%)', 
-            color: 'white', 
-            width: '36px', 
-            height: '36px', 
-            borderRadius: '10px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 4px 12px var(--accent-glow)'
-          }}>
-            <FaLayerGroup size={18} />
-          </div>
-          <div>
-            <h1 style={{ fontSize: '20px', fontWeight: '700', letterSpacing: '-0.5px', color: 'var(--text-main)', lineHeight: '1.2' }}>StackLens</h1>
-            <p style={{ fontSize: '11px', color: 'var(--text-muted)', letterSpacing: '0.5px', textTransform: 'uppercase', fontWeight: '600' }}>Codebase Intelligence</p>
-          </div>
+        <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-main)', letterSpacing: '0.5px' }}>
+          STACKLENS <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}>// STATIC ANALYSIS</span>
         </div>
-
-        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-          <button 
-            onClick={() => setShowMetrics(true)}
-            style={{
-              padding: '10px 16px',
-              borderRadius: '8px',
-              background: 'rgba(255,255,255,0.05)',
-              color: 'var(--text-main)',
-              border: '1px solid var(--border-color)',
-              fontWeight: '600',
-              fontSize: '13px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              transition: 'all 0.2s ease'
-            }}
-            onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
-            onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
-          >
-            <FaChartBar color="var(--accent)" /> Benchmarks
-          </button>
-
-          <form onSubmit={handleAnalyze} style={{ display: 'flex', gap: '12px', width: '550px' }}>
-            <div style={{ position: 'relative', flex: 1 }}>
-              <FaGithub style={{ position: 'absolute', left: '16px', top: '14px', color: 'var(--text-muted)', fontSize: '16px' }} />
-              <input 
-                type="text" 
-                value={repoUrl}
-                onChange={(e) => setRepoUrl(e.target.value)}
-                placeholder="https://github.com/owner/repo"
-                style={{
-                  width: '100%',
-                  padding: '12px 16px 12px 42px',
-                  borderRadius: '8px',
-                  border: '1px solid var(--border-color)',
-                  background: 'rgba(10, 12, 16, 0.5)',
-                  color: 'var(--text-main)',
-                  fontSize: '14px',
-                  outline: 'none',
-                  transition: 'all 0.3s ease',
-                  boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.2)'
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = 'var(--accent)';
-                  e.target.style.boxShadow = '0 0 0 2px var(--accent-glow), inset 0 2px 4px rgba(0,0,0,0.2)';
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = 'var(--border-color)';
-                  e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.2)';
-                }}
-              />
-            </div>
-            <button 
-              type="submit" 
-              disabled={loading}
-              style={{
-                padding: '0 24px',
-                borderRadius: '8px',
-                background: loading ? 'var(--bg-panel-hover)' : 'linear-gradient(135deg, var(--accent) 0%, #1e5ab8 100%)',
-                color: loading ? 'var(--text-muted)' : 'white',
-                border: '1px solid ' + (loading ? 'var(--border-color)' : 'transparent'),
-                fontWeight: '600',
-                fontSize: '14px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                transition: 'all 0.3s ease',
-                boxShadow: loading ? 'none' : '0 4px 12px var(--accent-glow)'
-              }}
-            >
-              {loading ? (
-                <motion.div 
-                  animate={{ rotate: 360 }} 
-                  transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                  style={{ width: '16px', height: '16px', border: '2px solid var(--text-muted)', borderTopColor: 'transparent', borderRadius: '50%' }}
-                />
-              ) : (
-                <><FaSearch /> Analyze</>
-              )}
-            </button>
-          </form>
-        </div>
-      </header>
-
-      {showMetrics && <MetricsDashboard onClose={() => setShowMetrics(false)} />}
-
-      {/* Main Content Area - 3 Pane Layout */}
-      <main style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>
         
-        <AnimatePresence>
-          {loading && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="glass-panel"
+        <form onSubmit={handleAnalyze} style={{ display: 'flex', gap: '8px', flex: 1, maxWidth: '600px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', background: 'var(--bg-base)', border: '1px solid var(--border-color)', flex: 1, padding: '0 8px' }}>
+            <FaGithub color="var(--text-muted)" size={12} />
+            <input 
+              type="text" 
+              value={repoUrl}
+              onChange={(e) => setRepoUrl(e.target.value)}
+              placeholder="https://github.com/owner/repo"
               style={{
-                position: 'absolute',
-                top: '50%', left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 50,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '24px',
-                padding: '40px 60px',
-                borderRadius: '16px',
-                border: '1px solid rgba(47, 129, 247, 0.3)'
+                width: '100%',
+                padding: '6px 8px',
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--text-main)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '12px',
+                outline: 'none'
               }}
-            >
-               <motion.div 
-                animate={{ rotate: 360, scale: [1, 1.1, 1] }} 
-                transition={{ rotate: { repeat: Infinity, duration: 2, ease: "linear" }, scale: { repeat: Infinity, duration: 1.5 } }}
-                style={{ 
-                  width: '56px', height: '56px', 
-                  border: '3px solid var(--accent)', 
-                  borderTopColor: 'transparent', 
-                  borderRadius: '50%',
-                  filter: 'drop-shadow(0 0 8px var(--accent-glow))'
-                }}
-              />
-              <div style={{ textAlign: 'center' }}>
-                <h2 style={{ fontSize: '20px', color: 'var(--text-main)', fontWeight: 600 }}>Analyzing Codebase</h2>
-                <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginTop: '6px' }}>Fetching files, building ASTs, and resolving dependencies</p>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            />
+          </div>
+          <button 
+            type="submit" 
+            disabled={loading}
+            className="ide-button"
+            style={{ borderColor: loading ? 'var(--border-color)' : 'var(--border-active)', color: loading ? 'var(--text-muted)' : 'var(--border-active)' }}
+          >
+            {loading ? <FaCircleNotch className="spinner" /> : <FaPlay />} 
+            {loading ? 'ANALYZING...' : 'RUN'}
+          </button>
+        </form>
+      </div>
 
-        {error ? (
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="glass-panel" style={{ padding: '30px 40px', borderRadius: '12px', border: '1px solid var(--danger)', textAlign: 'center' }}>
-              <h3 style={{ color: 'var(--danger)', fontSize: '18px', fontWeight: 600 }}>Analysis Failed</h3>
-              <p style={{ color: 'var(--text-main)', marginTop: '8px', fontSize: '14px' }}>{error}</p>
-            </div>
-          </div>
-        ) : (
-          <div style={{ display: 'flex', width: '100%', height: '100%' }}>
-            <SearchSidebar 
-              files={data?.files} 
-              onSelectFile={handleFileSelect} 
-              selectedFile={selectedFile} 
-            />
-            
-            <GraphContainer 
-              graphData={data?.visual} 
-              selectedFile={selectedFile}
-              impactData={impactData}
-              onNodeClick={handleFileSelect} 
-            />
-            
-            <ImpactPanel 
-              impactData={impactData} 
-              onSelectFile={handleFileSelect}
-            />
-          </div>
-        )}
-      </main>
+      {/* Row 3: Main Layout */}
+      {error ? (
+        <div style={{ gridColumn: '1 / -1', padding: '40px', color: 'var(--status-indirect)', fontFamily: 'var(--font-mono)', fontSize: '13px' }}>
+          Error: {error}
+        </div>
+      ) : (
+        <>
+          <RepositoryExplorer 
+            files={data?.files} 
+            analysis={data?.analysis}
+            onSelectFile={handleFileSelect} 
+            selectedFile={selectedFile} 
+          />
+          
+          <GraphContainer 
+            graphData={data?.visual} 
+            selectedFile={selectedFile}
+            impactData={impactData}
+            onNodeClick={handleFileSelect} 
+          />
+          
+          <ContextInspector 
+            selectedFile={selectedFile}
+            impactData={impactData} 
+            onNavigate={handleFileSelect}
+          />
+        </>
+      )}
+      
+      {/* Simple spinner keyframe injection for the RUN button */}
+      <style>{`
+        .spinner { animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+      `}</style>
     </div>
   );
 }

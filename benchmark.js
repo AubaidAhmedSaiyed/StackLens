@@ -3,78 +3,138 @@ const { performance } = require('perf_hooks');
 const fs = require('fs');
 const path = require('path');
 
-const TARGET_URL = 'https://github.com/expressjs/express';
-const RUNS = 3; // Number of times to hit the endpoint
+// ==========================================
+// CONFIGURATION (Environment variables or defaults)
+// ==========================================
+const API_URL = process.env.API_URL || 'http://localhost:5000/api/analyze';
+const TARGET_REPO = process.env.REPO_URL || 'https://github.com/expressjs/express';
+const TOTAL_RUNS = parseInt(process.env.RUNS, 10) || 5;
+const WARMUP_RUNS = parseInt(process.env.WARMUP_RUNS, 10) || 1;
+const SLEEP_MS = 2000;
 
-async function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+// ==========================================
+// UTILITY FUNCTIONS
+// ==========================================
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-async function runBenchmark(phase) {
-  console.log(`Starting ${phase} benchmark against ${TARGET_URL} for ${RUNS} runs...`);
-  
-  const metricsList = [];
-  
-  for (let i = 0; i < RUNS; i++) {
-    console.log(`Run ${i + 1}/${RUNS}...`);
+const calculatePercentile = (arr, p) => {
+  if (arr.length === 0) return 0;
+  const sorted = [...arr].sort((a, b) => a - b);
+  const index = (p / 100) * (sorted.length - 1);
+  const lower = Math.floor(index);
+  const upper = Math.ceil(index);
+  const weight = index % 1;
+  if (upper >= sorted.length) return sorted[lower];
+  return Math.round(sorted[lower] * (1 - weight) + sorted[upper] * weight);
+};
+
+// ==========================================
+// MAIN BENCHMARK ENGINE
+// ==========================================
+async function runBenchmarkSuite() {
+  console.log(`\n🚀 Starting Benchmark Suite`);
+  console.log(`Target API : ${API_URL}`);
+  console.log(`Repository : ${TARGET_REPO}`);
+  console.log(`Warmups    : ${WARMUP_RUNS}`);
+  console.log(`Measured   : ${TOTAL_RUNS}`);
+  console.log(`==========================================\n`);
+
+  const latencies = [];
+  const successfulRuns = [];
+  let failures = 0;
+
+  const totalIterations = WARMUP_RUNS + TOTAL_RUNS;
+
+  for (let i = 1; i <= totalIterations; i++) {
+    const isWarmup = i <= WARMUP_RUNS;
+    const runLabel = isWarmup ? `[Warmup ${i}/${WARMUP_RUNS}]` : `[Run ${i - WARMUP_RUNS}/${TOTAL_RUNS}]`;
+    
     try {
       const start = performance.now();
       
-      const response = await axios.post('http://localhost:5000/api/analyze', { url: TARGET_URL });
+      const response = await axios.post(API_URL, { url: TARGET_REPO });
       
-      const totalTimeMs = performance.now() - start;
-      const metrics = response.data.metrics;
-      
-      metricsList.push({
-        run: i + 1,
-        totalRoundTripMs: totalTimeMs,
-        backendScanTimeMs: metrics.scanTimeMs,
-        backendGraphTimeMs: metrics.graphTimeMs,
-        backendTotalTimeMs: metrics.totalTimeMs,
-        filesScanned: metrics.filesScanned,
-        nodes: metrics.nodes,
-        edges: metrics.edges
-      });
-      
-      // Wait a bit to let the server recover/cool down between runs
-      await sleep(2000);
-      
+      const latencyMs = Math.round(performance.now() - start);
+      const metrics = response.data.metrics || {};
+
+      console.log(`${runLabel} Success | Latency: ${latencyMs}ms | Nodes: ${metrics.nodes || 0}`);
+
+      if (!isWarmup) {
+        latencies.push(latencyMs);
+        successfulRuns.push({
+          run: i - WARMUP_RUNS,
+          latencyMs,
+          backendTotalMs: metrics.totalTimeMs || 0,
+          backendScanMs: metrics.scanTimeMs || 0,
+          backendGraphMs: metrics.graphTimeMs || 0,
+        });
+      }
     } catch (err) {
-      console.error(`Run ${i + 1} failed:`, err.response?.data || err.message);
+      const errorMessage = err.response?.data?.error || err.message;
+      console.error(`${runLabel} ❌ FAILED | Error: ${errorMessage}`);
+      if (!isWarmup) failures++;
     }
+
+    // Cooldown to prevent artificial Node.js garbage collection spikes or API throttling
+    if (i < totalIterations) await sleep(SLEEP_MS);
   }
+
+  // ==========================================
+  // METRICS COMPUTATION
+  // ==========================================
+  console.log(`\n📊 Generating Statistical Report...`);
   
-  // Calculate averages
-  if (metricsList.length === 0) {
-    console.error("All runs failed. Benchmark aborted.");
+  if (latencies.length === 0) {
+    console.error("All measured runs failed. Cannot compute statistics.");
     return;
   }
-  
-  const avg = {
-    totalRoundTripMs: metricsList.reduce((acc, curr) => acc + curr.totalRoundTripMs, 0) / metricsList.length,
-    backendScanTimeMs: metricsList.reduce((acc, curr) => acc + curr.backendScanTimeMs, 0) / metricsList.length,
-    backendGraphTimeMs: metricsList.reduce((acc, curr) => acc + curr.backendGraphTimeMs, 0) / metricsList.length,
-    backendTotalTimeMs: metricsList.reduce((acc, curr) => acc + curr.backendTotalTimeMs, 0) / metricsList.length,
-  };
-  
-  const finalResult = {
-    repo: TARGET_URL,
-    phase: phase,
+
+  const successRate = ((TOTAL_RUNS - failures) / TOTAL_RUNS) * 100;
+  const sumLatency = latencies.reduce((a, b) => a + b, 0);
+  const avgLatency = Math.round(sumLatency / latencies.length);
+  const minLatency = Math.min(...latencies);
+  const maxLatency = Math.max(...latencies);
+  const p50Latency = calculatePercentile(latencies, 50); // Median
+  const p95Latency = calculatePercentile(latencies, 95);
+
+  const report = {
     timestamp: new Date().toISOString(),
-    runs: RUNS,
-    averages: avg,
-    rawRuns: metricsList
+    config: { API_URL, TARGET_REPO, TOTAL_RUNS, WARMUP_RUNS },
+    reliability: {
+      successRate: `${successRate.toFixed(2)}%`,
+      failures,
+      successful: TOTAL_RUNS - failures
+    },
+    latencyStatisticsMs: {
+      min: minLatency,
+      max: maxLatency,
+      average: avgLatency,
+      p50_median: p50Latency,
+      p95: p95Latency
+    },
+    rawRuns: successfulRuns
   };
-  
-  const filename = `metrics_${phase.toLowerCase()}.json`;
+
+  // ==========================================
+  // SAVE RESULTS
+  // ==========================================
+  const filename = `benchmark_report_${Date.now()}.json`;
   const filepath = path.join(__dirname, filename);
   
-  fs.writeFileSync(filepath, JSON.stringify(finalResult, null, 2));
-  console.log(`Benchmark completed. Results saved to ${filepath}`);
-  console.log('Averages:', avg);
+  try {
+    fs.writeFileSync(filepath, JSON.stringify(report, null, 2));
+    console.log(`\n✅ Benchmark Complete. Results saved to: ${filename}`);
+  } catch (err) {
+    console.error(`\n❌ Failed to save benchmark results:`, err.message);
+  }
+
+  // Print final summary to console
+  console.log(`\n--- SUMMARY ---`);
+  console.log(`Success Rate : ${successRate}%`);
+  console.log(`Avg Latency  : ${avgLatency}ms`);
+  console.log(`Median (p50) : ${p50Latency}ms`);
+  console.log(`p95 Latency  : ${p95Latency}ms`);
+  console.log(`Min / Max    : ${minLatency}ms / ${maxLatency}ms\n`);
 }
 
-const args = process.argv.slice(2);
-const phase = args[0] || 'before';
-
-runBenchmark(phase);
+runBenchmarkSuite();

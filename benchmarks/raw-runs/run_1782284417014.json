@@ -1,0 +1,22 @@
+{
+  "filesScanned": 6000,
+  "nodes": 6000,
+  "edges": 5999,
+  "circular": 0,
+  "heavy": 0,
+  "dead": 0,
+  "scanTimeMs": 6,
+  "graphTimeMs": 680,
+  "impactQueryTimeMs": 18,
+  "cycleDetectionMs": 7,
+  "deadCodeDetectionMs": 3,
+  "totalTimeMs": 734,
+  "memory": {
+    "peakHeapUsedMB": 138,
+    "peakHeapTotalMB": 170,
+    "peakRssMB": 220,
+    "peakExternalMB": 5
+  },
+  "mostCoupledFile": "file_1.js",
+  "maxDependencyDepth": 5998
+}

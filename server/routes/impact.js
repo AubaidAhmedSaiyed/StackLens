@@ -65,6 +65,7 @@ router.get('/', (req, res) => {
     selectedFile: file,
     directImpact,
     indirectImpact: Array.from(indirectImpact),
+    forwardDependencies: graph[file] || [],
     chainEdges, // edges starting from direct impacts and propagating downwards
     impactSummary: {
       totalAffected: directImpact.length + indirectImpact.size,

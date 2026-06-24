@@ -146,11 +146,11 @@ function GraphInner({ graphData, selectedFile, impactData, onNodeClick }) {
       if (newEdge.source === selectedFile) {
         newEdge.className = 'impact-direct';
         newEdge.animated = true;
-        newEdge.markerEnd = { type: MarkerType.ArrowClosed, color: 'var(--warning)' };
+        newEdge.markerEnd = { type: MarkerType.ArrowClosed, color: 'var(--status-direct)' };
       } else if (chainEdgeIds.has(newEdge.id) || (directSet.has(newEdge.source) && indirectSet.has(newEdge.target)) || (indirectSet.has(newEdge.source) && indirectSet.has(newEdge.target))) {
         newEdge.className = 'impact-indirect';
         newEdge.animated = true;
-        newEdge.markerEnd = { type: MarkerType.ArrowClosed, color: 'var(--danger)' };
+        newEdge.markerEnd = { type: MarkerType.ArrowClosed, color: 'var(--status-indirect)' };
       } else {
         newEdge.className = 'unrelated';
         newEdge.animated = false;
@@ -171,53 +171,50 @@ function GraphInner({ graphData, selectedFile, impactData, onNodeClick }) {
   }, [selectedFile, impactData, graphData, setNodes, setEdges]);
 
   return (
-    <ReactFlow
-      nodes={nodes}
-      edges={edges}
-      nodeTypes={nodeTypes}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      onNodeClick={(_, node) => onNodeClick(node.id)}
-      onPaneClick={() => onNodeClick(null)}
-      onInit={(instance) => { reactFlowInstance.current = instance; }}
-      colorMode="dark"
-      minZoom={0.05}
-      maxZoom={4}
-    >
-      <Background color="var(--border-color)" gap={20} size={1} />
-      <Controls 
-        style={{ 
-          fill: 'var(--text-main)', 
-          backgroundColor: 'var(--bg-panel-solid)', 
-          border: '1px solid var(--border-color)',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-          borderRadius: '8px',
-          overflow: 'hidden'
-        }} 
-      />
-      <MiniMap 
-        nodeColor={(n) => {
-          if (n.className.includes('selected-node')) return 'var(--accent)';
-          if (n.className.includes('impact-direct')) return 'var(--warning)';
-          if (n.className.includes('impact-indirect')) return 'var(--danger)';
-          return 'rgba(48, 54, 61, 0.5)';
-        }}
-        maskColor="rgba(10, 12, 16, 0.8)"
-        style={{ 
-          backgroundColor: 'var(--bg-panel-solid)', 
-          border: '1px solid var(--border-color)',
-          borderRadius: '8px',
-          overflow: 'hidden'
-        }}
-      />
-    </ReactFlow>
+    <div style={{ gridArea: 'center', position: 'relative', width: '100%', height: '100%' }}>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        nodeTypes={nodeTypes}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onNodeClick={(_, node) => onNodeClick(node.id)}
+        onPaneClick={() => onNodeClick(null)}
+        onInit={(instance) => { reactFlowInstance.current = instance; }}
+        colorMode="dark"
+        minZoom={0.1}
+        maxZoom={1.5}
+        fitView
+        attributionPosition="bottom-right"
+      >
+        <Background variant="dots" gap={16} size={1} color="var(--border-color)" style={{ backgroundColor: 'var(--bg-base)' }} />
+        <Controls 
+          style={{ 
+            backgroundColor: 'var(--bg-panel)', 
+            border: '1px solid var(--border-color)',
+            boxShadow: 'none',
+            borderRadius: '2px'
+          }} 
+        />
+        <MiniMap 
+          nodeColor={(n) => {
+            if (n.className?.includes('impact-direct')) return 'var(--status-direct)';
+            if (n.className?.includes('impact-indirect')) return 'var(--status-indirect)';
+            if (n.className?.includes('selected-node')) return 'var(--border-active)';
+            return 'var(--border-color)';
+          }}
+          maskColor="rgba(13, 17, 23, 0.7)"
+          style={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-color)', borderRadius: '2px' }}
+        />
+      </ReactFlow>
+    </div>
   );
 }
 
 export default function GraphContainer(props) {
   if (!props.graphData) {
     return (
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
+      <div style={{ gridArea: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
         <div style={{ textAlign: 'center', opacity: 0.6 }}>
           <FaFileCode size={48} style={{ marginBottom: '16px', color: 'var(--border-color)' }}/>
           <h2 style={{ fontWeight: 500 }}>No Architecture Loaded</h2>
@@ -228,7 +225,7 @@ export default function GraphContainer(props) {
   }
 
   return (
-    <div style={{ flex: 1, position: 'relative' }}>
+    <div style={{ gridArea: 'center', position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
       <GraphInner {...props} />
     </div>
   );
