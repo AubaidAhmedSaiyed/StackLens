@@ -3,7 +3,7 @@ const { performance } = require('perf_hooks');
 const router = express.Router();
 
 const { fetchRepoTree, fetchFileContents } = require("../services/githubService");
-const buildGraph = require("../graph/buildGraph");
+const buildGraph = require("../graph/buildgraph");
 const buildReverseGraph = require("../graph/buildReverseGraph");
 
 const circular = require("../analysis/circular");
