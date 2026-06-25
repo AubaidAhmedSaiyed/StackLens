@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const API_URL = 'http://localhost:5000/api/analyze';
-const REPO = 'https://github.com/vitejs/vite';
+const REPO = 'https://github.com/vercel/next.js';
 
 const DIRS = {
   raw: path.join(__dirname, 'raw-runs'),

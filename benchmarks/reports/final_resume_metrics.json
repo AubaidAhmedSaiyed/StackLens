@@ -1,27 +1,31 @@
 {
-  "repository": "https://github.com/expressjs/express",
-  "fileCount": 141,
-  "nodeCount": 141,
-  "edgeCount": 62,
-  "fetchMs": 471,
-  "astParsingMs": 939,
-  "graphBuildMs": 2,
+  "repository": "https://github.com/vitejs/vite",
+  "fileCount": 1454,
+  "nodeCount": 1454,
+  "edgeCount": 1495,
+  "fetchMs": 2232,
+  "astParsingMs": 3295,
+  "graphBuildMs": 19,
   "bfsMs": 0,
-  "cycleDetectionMs": 0,
-  "deadCodeMs": 0,
-  "totalAnalysisMs": 1413,
-  "peakHeapMB": 83,
-  "averageHeapMB": 78,
-  "finalHeapMB": 81,
-  "rssMB": 181,
+  "cycleDetectionMs": 3,
+  "deadCodeMs": 1,
+  "totalAnalysisMs": 5556,
+  "peakHeapMB": 94,
+  "averageHeapMB": 90,
+  "finalHeapMB": 89,
+  "rssMB": 286,
   "statistics": {
     "runs": 20,
-    "min": 697,
-    "max": 5988,
-    "mean": 1413,
-    "p50": 1160,
-    "p95": 2196,
-    "p99": 5230
+    "min": 4773,
+    "max": 7432,
+    "mean": 5556,
+    "p50": 5110,
+    "p95": 7055,
+    "p99": 7357
   },
-  "coldRunData": null
+  "coldRunData": {
+    "fetchMs": 24413,
+    "totalAnalysisMs": 28781,
+    "peakHeapMB": 108
+  }
 }

@@ -1,0 +1,50 @@
+{
+  "isColdRun": false,
+  "filesScanned": 1454,
+  "nodes": 1454,
+  "edges": 1495,
+  "stages": {
+    "githubFetch": {
+      "start": 980962.4217,
+      "end": 983211.4082,
+      "durationMs": 2249
+    },
+    "astParsing": {
+      "start": 983211.9575,
+      "end": 987064.7059,
+      "durationMs": 3853
+    },
+    "graphBuild": {
+      "start": 987065.2268,
+      "end": 987085.9545,
+      "durationMs": 21
+    },
+    "cycleDetection": {
+      "start": 987088.2742,
+      "end": 987099.942,
+      "durationMs": 12
+    },
+    "deadCodeDetection": {
+      "start": 987100.3645,
+      "end": 987100.9267,
+      "durationMs": 1
+    },
+    "bfsImpactAnalysis": {
+      "start": 987102.816,
+      "end": 987103.1677,
+      "durationMs": 0
+    },
+    "totalAnalysis": {
+      "start": 980962.3506,
+      "end": 987103.3689,
+      "durationMs": 6141
+    }
+  },
+  "memory": {
+    "peakHeapMB": 88,
+    "averageHeapMB": 88,
+    "finalHeapMB": 88,
+    "rssMB": 289,
+    "externalMB": 4
+  }
+}
