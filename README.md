@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://img.shields.io/badge/StackLens-Codebase_Intelligence-2f81f7?style=for-the-badge" alt="StackLens Logo" />
   <h1>StackLens</h1>
-  <p><strong>A Full-Stack Codebase Intelligence & Dependency Visualization Platform</strong></p>
+  <p><strong>A Full-Stack Repo Dependency Visualization Engine</strong></p>
 </div>
 
 StackLens takes any GitHub repository, parses its abstract syntax trees (ASTs), and generates a stunning, interactive dependency graph. It helps software engineers quickly map out unfamiliar codebases, detect architectural anti-patterns, and visualize the "blast radius" of code changes.
