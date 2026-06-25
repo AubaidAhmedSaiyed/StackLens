@@ -32,10 +32,10 @@ export default function TelemetryBar({ repoUrl, metrics }) {
       
       <div style={{ display: 'flex', gap: '16px', opacity: 0.9 }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <FaClock /> {(metrics.totalTimeMs / 1000).toFixed(2)}s
+          <FaClock /> {metrics.stages?.totalAnalysis ? (metrics.stages.totalAnalysis.durationMs / 1000).toFixed(2) : '0.00'}s
         </span>
         <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <FaHdd /> {metrics.memoryUsedMB || 0}MB
+          <FaHdd /> {metrics.memory?.peakHeapMB || 0}MB
         </span>
       </div>
     </div>
