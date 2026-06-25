@@ -27,7 +27,8 @@ export default function App() {
     setImpactData(null);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/analyze', { url: repoUrl });
+      const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await axios.post(`${API_BASE}/api/analyze`, { url: repoUrl });
       setData(response.data);
     } catch (err) {
       console.error(err);
@@ -46,7 +47,8 @@ export default function App() {
 
     setSelectedFile(file);
     try {
-      const response = await axios.get(`http://localhost:5000/api/impact?file=${encodeURIComponent(file)}`);
+      const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await axios.get(`${API_BASE}/api/impact?file=${encodeURIComponent(file)}`);
       setImpactData(response.data);
     } catch (err) {
       console.error("Failed to fetch impact data:", err);

@@ -10,7 +10,8 @@ export default function MetricsDashboard({ onClose }) {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/metrics/history');
+        const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const res = await axios.get(`${API_BASE}/api/metrics/history`);
         setHistory(res.data);
       } catch (err) {
         console.error("Failed to fetch metrics history", err);
